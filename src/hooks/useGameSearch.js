@@ -10,16 +10,14 @@ export function useGameSearch() {
   const [error, setError]       = useState(null);
   const [query, setQuery]       = useState('');
   const [hasSearched, setHasSearched] = useState(false);
+  const [activeGenre, setActiveGenre] = useState(null);
 
-  /**
-   * 게임 검색 실행
-   * @param {string} searchQuery - 검색어
-   */
   const search = useCallback(async (searchQuery) => {
     setLoading(true);
     setError(null);
     setQuery(searchQuery);
     setHasSearched(true);
+    setActiveGenre(null);
 
     try {
       const data = await fetchGames(searchQuery);
@@ -32,14 +30,30 @@ export function useGameSearch() {
     }
   }, []);
 
-  /**
-   * 인기 게임 목록 로드 (초기 화면용)
-   */
+  const filterByGenre = useCallback(async (genre) => {
+    setLoading(true);
+    setError(null);
+    setQuery('');
+    setHasSearched(false);
+    setActiveGenre(genre);
+
+    try {
+      const data = await fetchGames('', 1, genre.id);
+      setGames(data.results || []);
+    } catch (err) {
+      setError(err.message || '장르 데이터를 불러오지 못했습니다.');
+      setGames([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   const loadPopular = useCallback(async () => {
     setLoading(true);
     setError(null);
     setHasSearched(false);
     setQuery('');
+    setActiveGenre(null);
 
     try {
       const data = await fetchGames('');
@@ -51,5 +65,5 @@ export function useGameSearch() {
     }
   }, []);
 
-  return { games, isLoading, error, query, hasSearched, search, loadPopular };
+  return { games, isLoading, error, query, hasSearched, activeGenre, search, filterByGenre, loadPopular };
 }

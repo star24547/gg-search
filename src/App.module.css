@@ -4,52 +4,33 @@
   flex-direction: column;
 }
 
-/* ── 헤더 ── */
 .header {
   text-align: center;
-  padding: 60px 24px 48px;
+  padding: 40px 24px 32px;
   background: linear-gradient(180deg, #111420 0%, var(--bg) 100%);
   border-bottom: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logoIcon { font-size: 36px; }
-
+.logo { display: flex; align-items: center; gap: 10px; }
+.logoIcon { font-size: 32px; }
 .logoText {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 700;
   letter-spacing: -1px;
   color: var(--text);
 }
-
 .logoAccent { color: var(--accent); }
+.tagline { color: var(--text-muted); font-size: 14px; margin-top: -4px; }
 
-.tagline {
-  color: var(--text-muted);
-  font-size: 15px;
-  margin-top: -8px;
-}
+.body { display: flex; flex: 1; align-items: flex-start; }
 
-/* ── 메인 ── */
-.main {
-  flex: 1;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 36px 24px;
-}
+.main { flex: 1; padding: 32px 28px; min-width: 0; }
 
-/* ── 푸터 ── */
 .footer {
   text-align: center;
   padding: 24px;
@@ -57,9 +38,9 @@
   color: var(--text-muted);
   font-size: 13px;
 }
+.footer a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
-.footer a {
-  color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+@media (max-width: 768px) {
+  .body { flex-direction: column; }
+  .main { padding: 20px 16px; }
 }

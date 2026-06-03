@@ -18,12 +18,14 @@ async function apiFetch(endpoint, params = {}) {
 
 /**
  * 게임 목록 검색
- * @param {string} query - 검색 키워드 (없으면 인기 게임)
- * @param {number} page  - 페이지 번호
+ * @param {string} query   - 검색 키워드 (없으면 인기 게임)
+ * @param {number} page    - 페이지 번호
+ * @param {number} genreId - 장르 ID (없으면 전체)
  */
-export async function fetchGames(query = '', page = 1) {
+export async function fetchGames(query = '', page = 1, genreId = null) {
   const params = { page, page_size: 20, ordering: '-rating' };
-  if (query) params.search = query;
+  if (query)   params.search = query;
+  if (genreId) params.genres = genreId;
   return apiFetch('/games', params);
 }
 
@@ -41,4 +43,11 @@ export async function fetchGameDetail(id) {
  */
 export async function fetchGameScreenshots(id) {
   return apiFetch(`/games/${id}/screenshots`);
+}
+
+/**
+ * 장르 목록 조회
+ */
+export async function fetchGenres() {
+  return apiFetch('/genres');
 }
