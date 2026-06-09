@@ -6,7 +6,7 @@ import styles from './GameCard.module.css';
  *   game: object    - RAWG API 게임 데이터
  *   onClick()       - 카드 클릭 콜백 (상세 보기)
  */
-export default function GameCard({ game, onClick }) {
+export default function GameCard({ game, onClick, onToggleFavorite, isFavorite }) {
   // 평점에 따른 색상 반환
   const getRatingColor = (rating) => {
     if (rating >= 4.5) return '#00e5ff';
@@ -45,6 +45,15 @@ export default function GameCard({ game, onClick }) {
         >
           ★ {game.rating?.toFixed(1) || 'N/A'}
         </div>
+        <button
+          className={styles.heartBtn}
+          onClick={(e) => {
+            e.stopPropagation(); // 카드 클릭 이벤트 막기
+            onToggleFavorite(game);
+          }}
+        >
+          {isFavorite ? '❤️' : '🤍'}
+        </button>
       </div>
 
       {/* 카드 내용 */}

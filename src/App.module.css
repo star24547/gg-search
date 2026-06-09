@@ -15,6 +15,16 @@
   gap: 12px;
 }
 
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 680px;
+  position: relative;
+}
+
 .logo { display: flex; align-items: center; gap: 10px; }
 .logoIcon { font-size: 32px; }
 .logoText {
@@ -27,8 +37,21 @@
 .logoAccent { color: var(--accent); }
 .tagline { color: var(--text-muted); font-size: 14px; margin-top: -4px; }
 
-.body { display: flex; flex: 1; align-items: flex-start; }
+.themeBtn {
+  position: absolute;
+  right: 0;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.themeBtn:hover { background: var(--border); }
 
+.body { display: flex; flex: 1; align-items: flex-start; }
 .main { flex: 1; padding: 32px 28px; min-width: 0; }
 
 .footer {

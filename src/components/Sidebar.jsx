@@ -9,7 +9,7 @@ const GENRE_EMOJI = {
   fighting: '🥊', casual: '🎲', family: '👨‍👩‍👧', card: '🃏',
 };
 
-export default function Sidebar({ activeGenre, onSelectGenre, onReset }) {
+export default function Sidebar({ activeGenre, onSelectGenre, onReset, showFavorites, onToggleFavorites }) {
   const [genres, setGenres]     = useState([]);
   const [isLoading, setLoading] = useState(true);
 
@@ -30,6 +30,15 @@ export default function Sidebar({ activeGenre, onSelectGenre, onReset }) {
         <span className={styles.emoji}>🔥</span>
         <span className={styles.name}>인기 게임</span>
       </button>
+
+      <button
+        className={`${styles.item} ${showFavorites ? styles.active : ''}`}
+        onClick={onToggleFavorites}
+      >
+        <span className={styles.emoji}>❤️</span>
+        <span className={styles.name}>즐겨찾기</span>
+      </button>
+      
       <div className={styles.divider} />
       {isLoading ? (
         <p className={styles.loading}>불러오는 중...</p>

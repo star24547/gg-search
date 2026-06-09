@@ -13,7 +13,7 @@ import styles from './GameList.module.css';
  *   hasSearched: bool - 검색 실행 여부
  *   onSelectGame()    - 게임 선택 콜백
  */
-export default function GameList({ games, isLoading, error, query, hasSearched, onSelectGame }) {
+export default function GameList({ games, isLoading, error, query, hasSearched, sectionTitle, onSelectGame, onToggleFavorite, isFavorite }) {
   // 로딩 중
   if (isLoading) return <LoadingSpinner />;
 
@@ -47,6 +47,8 @@ export default function GameList({ games, isLoading, error, query, hasSearched, 
             key={game.id}
             game={game}
             onClick={() => onSelectGame(game.id)}
+            onToggleFavorite={onToggleFavorite}
+            isFavorite={isFavorite ? isFavorite(game.id) : false}
           />
         ))}
       </div>
