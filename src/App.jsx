@@ -9,8 +9,9 @@ import styles from './App.module.css';
 
 export default function App() {
   const {
-    games, isLoading, error, query, hasSearched,
-    activeGenre, search, filterByGenre, loadPopular
+    games, isLoading, isLoadingMore, error,
+    query, hasSearched, activeGenre, hasMore,
+    search, filterByGenre, loadPopular, loadMore
   } = useGameSearch();
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
   const [showFavorites, setShowFavorites] = useState(false);
@@ -64,15 +65,18 @@ export default function App() {
         />
         <main className={styles.main}>
           <GameList
-            games={showFavorites ? favorites : games}               // 👈 수정
+            games={showFavorites ? favorites : games}
             isLoading={isLoading}
+            isLoadingMore={isLoadingMore}
             error={error}
             query={query}
             hasSearched={hasSearched}
-            sectionTitle={showFavorites ? '❤️ 즐겨찾기' : sectionTitle} // 👈 수정
+            sectionTitle={showFavorites ? '❤️ 즐겨찾기' : sectionTitle}
+            hasMore={showFavorites ? false : hasMore}
             onSelectGame={setSelectedGameId}
-            onToggleFavorite={toggleFavorite}                       // 👈 추가
-            isFavorite={isFavorite}                                 // 👈 추가
+            onToggleFavorite={toggleFavorite}
+            isFavorite={isFavorite}
+            onLoadMore={loadMore}
           />
         </main>
       </div>
